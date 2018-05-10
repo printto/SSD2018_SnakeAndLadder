@@ -1,4 +1,4 @@
-## SD Snake and Ladder
+## SSD Snake and Ladder
 ### 2-4 players Snake and Ladder game
 
 This is Snake and Ladder game that can play by 2-4 players.
