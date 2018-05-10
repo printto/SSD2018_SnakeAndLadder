@@ -1,5 +1,5 @@
-##SSD Snake and Ladder
-###2-4 players Snake and Ladder game
+## SD Snake and Ladder
+### 2-4 players Snake and Ladder game
 
 This is Snake and Ladder game that can play by 2-4 players.
 The board's size is 8x8. Players take turns to roll 1 die at a time.
