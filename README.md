@@ -5,8 +5,9 @@ This is Snake and Ladder game that can play by 2-4 players.
 The board's size is 8x8. Players take turns to roll 1 die at a time.
 
 Progress:
-- Base GUI of the game.
-- Player amount selector in the start screen.
+- Playable game.
+- GUI of the game.
+- Select player amount in the start screen.
 
 Todo:
 - Implements snakes.
