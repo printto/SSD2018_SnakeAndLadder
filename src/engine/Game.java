@@ -108,6 +108,7 @@ public class Game extends Observable{
 		board.addWarp(32, 18);
 		board.addWarp(33, 47);
 		board.addWarp(35, 51);
+		board.addWarp(39, 7);
 		board.addWarp(41, 55);
 		board.addWarp(43, 29);
 		board.addWarp(59, 25);
