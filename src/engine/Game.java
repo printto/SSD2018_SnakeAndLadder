@@ -75,10 +75,14 @@ public class Game extends Observable{
 		return temp;
 	}
 	
-	public void checkCurrentPlayerFreeze(){
+	public void checkCurrentPlayerStatus(){
 		if(currentPlayer().isFreeze()){
 			setChanged();
 			notifyObservers(ObserverCodes.FREEZE_STRING);
+		}
+		if(currentPlayer().isReverse()){
+			setChanged();
+			notifyObservers(ObserverCodes.REVERSE_STRING);
 		}
 	}
 
@@ -103,6 +107,7 @@ public class Game extends Observable{
 		board.addWarp(28, 36);
 		board.addWarp(32, 18);
 		board.addWarp(33, 47);
+		board.addWarp(35, 51);
 		board.addWarp(41, 55);
 		board.addWarp(43, 29);
 		board.addWarp(59, 25);

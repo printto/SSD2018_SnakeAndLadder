@@ -28,6 +28,9 @@ public class Board {
 		if(squares[newPos].getMode() == Square.FREEZE){
 			piece.freeze();
 		}
+		else if(squares[newPos].getMode() == Square.REVERSE){
+			piece.reverse();
+		}
 	}
 
 	public int getPiecePosition(Piece piece){

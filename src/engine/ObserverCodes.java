@@ -7,5 +7,6 @@ public class ObserverCodes {
 	final public static String PLAYER_CHANGED_STRING = "player_changed";
 	final public static String PLAYER_WARP_STRING = "player_warp";
 	final public static String FREEZE_STRING = "player_freeze";
+	final public static String REVERSE_STRING = "player_reverse";
 	
 }

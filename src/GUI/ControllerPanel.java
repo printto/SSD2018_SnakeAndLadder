@@ -51,7 +51,7 @@ public class ControllerPanel extends JPanel implements Observer{
 			if(temp.equals(ObserverCodes.DIE_ROLLED_STRING)){
 				textArea.append("Die rolled: " + game.getDieFace() + "\n");
 				game.currentPlayerMovePiece(game.getDieFace());
-				game.checkCurrentPlayerFreeze();
+				game.checkCurrentPlayerStatus();
 				if(game.currentPlayerIsAtWarp()){
 					game.currentPlayerWarp(game.getWarpAtCurrentPosition());
 				}
@@ -60,13 +60,16 @@ public class ControllerPanel extends JPanel implements Observer{
 					infoBox("Player "+game.currentPlayerName()+" wins~!","Game ended!");
 					frame.end();
 				}
-				else if(game.getDieFace() != 6){
+				else if(game.getDieFace() != 6 && !game.currentPlayer().isReverse()){
 					game.switchPlayer();
 				}
 			}
 			if(temp.equals(ObserverCodes.FREEZE_STRING)){
 				textArea.append(game.currentPlayerName() + " is frozen.\n");
 				game.switchPlayer();
+			}
+			if(temp.equals(ObserverCodes.REVERSE_STRING)){
+				textArea.append(game.currentPlayerName() + " stepped on reverse buff.\n");
 			}
 			if(temp.equals(ObserverCodes.PLAYER_CHANGED_STRING)){
 				textArea.append("\n" + game.currentPlayerName() + "'s turn.\n");
@@ -80,7 +83,7 @@ public class ControllerPanel extends JPanel implements Observer{
 			}
 			if(temp.equals(ObserverCodes.PLAYER_WARP_STRING)){
 				textArea.append( game.currentPlayerName() + " met the "+ game.getWarpAtCurrentPosition() + "\n");;
-				game.checkCurrentPlayerFreeze();
+				game.checkCurrentPlayerStatus();
 			}
 		}
 		textArea.setCaretPosition(textArea.getDocument().getLength());

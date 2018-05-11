@@ -19,7 +19,13 @@ public class Player {
 	}
 	
 	public void movePiece(Board board, int steps){
-		board.movePiece(piece, steps);
+		if(isReverse()){
+			board.movePiece(piece, - steps);
+			piece.unreverse();
+		}
+		else{
+			board.movePiece(piece, steps);
+		}
 	}
 	
 	public Piece getPiece(){
@@ -36,6 +42,18 @@ public class Player {
 	
 	public boolean isFreeze(){
 		return piece.isFreeze();
+	}
+	
+	public void reverse(){
+		piece.reverse();
+	}
+	
+	public void unreverse(){
+		piece.unreverse();
+	}
+	
+	public boolean isReverse(){
+		return piece.isReverse();
 	}
 
 }
