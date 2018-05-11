@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -12,6 +13,8 @@ import java.util.Observer;
 
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -26,7 +29,7 @@ public class BoardPanel extends JPanel implements Observer{
 
 	private Game game;
 	JPanel[] panels = new JPanel[64];
-	JLabel[] numLabel = new JLabel[64];
+	//	JLabel[] numLabel = new JLabel[64];
 	JLabel[] playerLabel;
 
 	public BoardPanel(Game game){
@@ -54,49 +57,51 @@ public class BoardPanel extends JPanel implements Observer{
 		for(int i = 0 ; i < 64 ; i++){
 			panels[i] = new JPanel();
 			panels[i].setLayout(new FlowLayout());
-			if(i%2 == 0){
-				panels[i].setBackground(new Color(200,200,200));
-			}
-			else{
-				panels[i].setBackground(Color.white);
-			}
+			panels[i].setOpaque(true);
+			panels[i].setBackground(new Color(0,0,0,0));
+//			if(i%2 == 0){
+//				panels[i].setBackground(new Color(200,200,200));
+//			}
+//			else{
+//				panels[i].setBackground(Color.white);
+//			}
 			this.add(panels[i]);
-			numLabel[i] = new JLabel(i+"");
+//			numLabel[i] = new JLabel(i+"");
 		}
 	}
 
 	public void updateBoard(){
 		clearPanel();
-		for(int i = 0 ; i < 8 ; i++){
-			addPanel(i);
-		}
-		for(int i = 15 ; i >= 8 ; i--){
-			addPanel(i);
-		}
-		for(int i = 16 ; i < 24 ; i++){
-			addPanel(i);
-		}
-		for(int i = 31 ; i >= 24 ; i--){
-			addPanel(i);
-		}
-		for(int i = 32 ; i < 40 ; i++){
-			addPanel(i);
-		}
-		for(int i = 47 ; i >= 40 ; i--){
+		for(int i = 63 ; i >= 56 ; i--){
 			addPanel(i);
 		}
 		for(int i = 48 ; i < 56 ; i++){
 			addPanel(i);
 		}
-		for(int i = 63 ; i >= 56 ; i--){
+		for(int i = 47 ; i >= 40 ; i--){
+			addPanel(i);
+		}
+		for(int i = 32 ; i < 40 ; i++){
+			addPanel(i);
+		}
+		for(int i = 31 ; i >= 24 ; i--){
+			addPanel(i);
+		}
+		for(int i = 16 ; i < 24 ; i++){
+			addPanel(i);
+		}
+		for(int i = 15 ; i >= 8 ; i--){
+			addPanel(i);
+		}
+		for(int i = 0 ; i < 8 ; i++){
 			addPanel(i);
 		}
 		this.revalidate();
 		this.repaint();
 	}
-	
+
 	private void addPanel(int i){
-		panels[i].add(numLabel[i]);
+		//		panels[i].add(numLabel[i]);
 		for(Player player: game.getPlayers()){
 			if(game.getBoard().getSquares()[i].hasPiece(player.getPiece())){
 				for(JLabel pl : playerLabel){
@@ -123,6 +128,13 @@ public class BoardPanel extends JPanel implements Observer{
 				updateBoard();
 			}
 		}
+	}
+
+	@Override
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		ImageIcon bg = new ImageIcon(this.getClass().getResource("/img/board-1.png"));
+		g.drawImage(bg.getImage(), 0, 0, null);
 	}
 
 }
