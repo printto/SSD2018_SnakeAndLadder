@@ -22,6 +22,10 @@ public class Player {
 		board.movePiece(piece, steps);
 	}
 	
+	public void warpPiece(Board board, Warp warp){
+		board.warpPiece(piece, warp);
+	}
+	
 	public Piece getPiece(){
 		return piece;
 	}

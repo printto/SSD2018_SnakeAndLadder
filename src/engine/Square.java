@@ -7,6 +7,7 @@ public class Square {
 	private List<Piece> pieces;
 	private int number;
 	private boolean goal;
+	private Warp warp;
 	
 	public Square(int number){
 		this.number = number;
@@ -36,6 +37,18 @@ public class Square {
 	
 	public int getNumber(){
 		return number;
+	}
+	
+	public void setWarp(Warp warp){
+		this.warp = warp;
+	}
+	
+	public boolean hasWarp(){
+		return warp != null;
+	}
+	
+	public Warp getWarp(){
+		return warp;
 	}
 	
 }

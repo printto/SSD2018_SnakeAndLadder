@@ -14,7 +14,7 @@ import engine.Player;
 public class MainFrame extends JFrame{
 	
 	Game game;
-	JButton restartBtn = new JButton("Restart");
+	JButton restartBtn = new JButton("Play again~!");
 	JButton quitBtn = new JButton("Quit");
 	JPanel south;
 

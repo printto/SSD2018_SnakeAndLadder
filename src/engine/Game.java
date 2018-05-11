@@ -21,6 +21,7 @@ public class Game extends Observable{
 			board.addPiece(players.get(i).getPiece(), 0);
 		}
 		ended = false;
+		initWarp();
 	}
 
 	public boolean isEnded() { return ended; }
@@ -51,6 +52,14 @@ public class Game extends Observable{
 			end();
 		}
 	}
+	
+	public void currentPlayerWarp(Warp warp){
+		setChanged();
+		notifyObservers(ObserverCodes.PLAYER_WARP_STRING);
+		currentPlayer().warpPiece(board, warp);
+		setChanged();
+		notifyObservers(ObserverCodes.BOARD_UPDATED_STRING);
+	}
 
 	public boolean currentPlayerWins(){
 		return board.pieceIsAtGoal(currentPlayer().getPiece());
@@ -75,6 +84,29 @@ public class Game extends Observable{
 
 	public ArrayList<Player> getPlayers(){
 		return players;
+	}
+
+	private void initWarp() {
+		board.addWarp(4, 19);
+		board.addWarp(9, 25);
+		board.addWarp(14, 30);
+		board.addWarp(16, 2);
+		board.addWarp(26, 13);
+		board.addWarp(28, 36);
+		board.addWarp(32, 18);
+		board.addWarp(33, 47);
+		board.addWarp(41, 55);
+		board.addWarp(43, 29);
+		board.addWarp(59, 25);
+		board.addWarp(61, 29);
+	}
+	
+	public boolean currentPlayerIsAtWarp(){
+		return board.pieceIsAtWarp(currentPlayer().getPiece());
+	}
+	
+	public Warp getWarpAtCurrentPosition(){
+		return board.getWarpInSquare(currentPlayerPosition());
 	}
 
 }

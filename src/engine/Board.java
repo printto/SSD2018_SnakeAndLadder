@@ -26,6 +26,12 @@ public class Board {
 		}
 		addPiece(piece, newPos);
 	}
+	
+	public void warpPiece(Piece piece , Warp warp){
+		int pos = getPiecePosition(piece);
+		int newPos = warp.getDestination();
+		movePiece(piece,newPos-pos);
+	}
 
 	public int getPiecePosition(Piece piece){
 		for(Square s : squares){
@@ -40,8 +46,25 @@ public class Board {
 		return squares[getPiecePosition(piece)].isGoal();
 	}
 	
+	public boolean pieceIsAtWarp(Piece piece){
+		return squares[getPiecePosition(piece)].hasWarp();
+	}
+	
 	public Square[] getSquares(){
 		return squares;
+	}
+	
+	public void addWarp(int position, int destination){
+		if(position < destination){
+			squares[position].setWarp(new Warp(destination,Warp.LADDER));
+		}
+		else{
+			squares[position].setWarp(new Warp(destination,Warp.SNAKE));
+		}
+	}
+	
+	public Warp getWarpInSquare(int position){
+		return squares[position].getWarp();
 	}
 
 }

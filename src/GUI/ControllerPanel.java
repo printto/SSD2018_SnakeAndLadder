@@ -51,6 +51,9 @@ public class ControllerPanel extends JPanel implements Observer{
 					infoBox("Player "+game.currentPlayerName()+" wins~!","Game ended!");
 					frame.end();
 				}
+				else if(game.currentPlayerIsAtWarp()){
+					game.currentPlayerWarp(game.getWarpAtCurrentPosition());
+				}
 				else{
 					game.switchPlayer();
 				}
@@ -59,12 +62,14 @@ public class ControllerPanel extends JPanel implements Observer{
 				textArea.append("\n" + game.currentPlayerName() + "'s turn.\n");
 				textArea.append( game.currentPlayerName() + " is at " + game.currentPlayerPosition() + ".\n");
 			}
+			if(temp.equals(ObserverCodes.PLAYER_WARP_STRING)){
+				textArea.append( game.currentPlayerName() + " met the "+ game.getWarpAtCurrentPosition() + "\n");;
+			}
 		}
 		textArea.setCaretPosition(textArea.getDocument().getLength());
 	}
 	
-	public void infoBox(String infoMessage, String titleBar)
-    {
+	public void infoBox(String infoMessage, String titleBar) {
         JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
 	
