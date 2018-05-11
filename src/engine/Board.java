@@ -26,12 +26,6 @@ public class Board {
 		}
 		addPiece(piece, newPos);
 	}
-	
-	public void warpPiece(Piece piece , Warp warp){
-		int pos = getPiecePosition(piece);
-		int newPos = warp.getDestination();
-		movePiece(piece,newPos-pos);
-	}
 
 	public int getPiecePosition(Piece piece){
 		for(Square s : squares){

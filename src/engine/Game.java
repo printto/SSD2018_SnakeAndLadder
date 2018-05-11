@@ -56,7 +56,7 @@ public class Game extends Observable{
 	public void currentPlayerWarp(Warp warp){
 		setChanged();
 		notifyObservers(ObserverCodes.PLAYER_WARP_STRING);
-		currentPlayer().warpPiece(board, warp);
+		currentPlayer().movePiece(board, warp.getDestination() - currentPlayerPosition());
 		setChanged();
 		notifyObservers(ObserverCodes.BOARD_UPDATED_STRING);
 	}
