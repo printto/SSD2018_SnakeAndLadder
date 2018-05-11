@@ -27,7 +27,7 @@ public class DiePanel extends JPanel{
 
 	private void initComponents() {
 		this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-		this.add(number);
+//		this.add(number);
 		ImageIcon rollbtnImg = new ImageIcon(this.getClass().getResource("/img/rollbtn.png"));
 		roll_btn = new JButton(rollbtnImg);
 		roll_btn.addActionListener(new rollDie());

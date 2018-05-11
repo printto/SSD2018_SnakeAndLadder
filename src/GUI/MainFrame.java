@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,8 +18,8 @@ import engine.Player;
 public class MainFrame extends JFrame{
 	
 	Game game;
-	JButton restartBtn = new JButton("Restart");
-	JButton quitBtn = new JButton("Quit");
+	JButton restartBtn;
+	JButton quitBtn;
 	JPanel south;
 
 	public MainFrame(Game game){
@@ -30,6 +31,10 @@ public class MainFrame extends JFrame{
 		BoardPanel boardUI = new BoardPanel(game);
 		DiePanel dieUI = new DiePanel(game);
 		ControllerPanel controllerUI = new ControllerPanel(this,game);
+		ImageIcon restartbtnImg = new ImageIcon(this.getClass().getResource("/img/restartbtn.png"));
+		restartBtn = new JButton(restartbtnImg);
+		ImageIcon quitbtnImg = new ImageIcon(this.getClass().getResource("/img/quitbtn.png"));
+		quitBtn = new JButton(quitbtnImg);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());
 		this.setResizable(false);
@@ -42,6 +47,10 @@ public class MainFrame extends JFrame{
 		this.add(center,BorderLayout.CENTER);
 		south = new JPanel();
 		south.add(dieUI);
+		south.add(restartBtn);
+		south.add(quitBtn);
+		restartBtn.addActionListener(new EndListener(EndListener.RESTART));
+		quitBtn.addActionListener(new EndListener(EndListener.QUIT));
 		this.add(south,BorderLayout.SOUTH);
 		JPanel east = new JPanel();
 		east.add(controllerUI);
@@ -59,8 +68,6 @@ public class MainFrame extends JFrame{
 		south = new JPanel();
 		south.add(restartBtn);
 		south.add(quitBtn);
-		restartBtn.addActionListener(new EndListener(EndListener.RESTART));
-		quitBtn.addActionListener(new EndListener(EndListener.QUIT));
 		this.add(south,BorderLayout.SOUTH);
 		pack();
 	}
@@ -68,7 +75,7 @@ public class MainFrame extends JFrame{
 	class EndListener implements ActionListener{
 		
 		final public static int RESTART = 0;
-		final public static int QUIT = 0;
+		final public static int QUIT = 1;
 		int mode;
 		
 		public EndListener(int mode){
