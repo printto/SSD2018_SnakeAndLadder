@@ -12,8 +12,7 @@ Progress:
 Todo:
 - Implements snakes.
 - Implements ladder.
-- Flip the board (Currently players walk from the top to the bottom).
-- More graphic in the game.
+- More graphical sprites in the game.
 
 Group members:
 - Pappim Pipatkasrira
