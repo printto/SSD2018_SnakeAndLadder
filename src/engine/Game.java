@@ -108,7 +108,7 @@ public class Game extends Observable{
 		board.addWarp(59, 25);
 		board.addWarp(61, 29);
 		board.addTrap(10, Square.REVERSE);
-		board.addTrap(19, Square.FREEZE);
+		board.addTrap(20, Square.FREEZE);
 		board.addTrap(23, Square.REVERSE);
 		board.addTrap(31, Square.FREEZE);
 		board.addTrap(34, Square.REVERSE);
