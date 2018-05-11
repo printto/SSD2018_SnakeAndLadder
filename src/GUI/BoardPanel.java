@@ -49,7 +49,7 @@ public class BoardPanel extends JPanel implements Observer{
 		Font font = new Font("Courier", Font.BOLD,15);
 		playerLabel = new JLabel[game.getPlayers().size()];
 		Color[] colors = {
-				Color.red,
+				Color.RED,
 				Color.BLUE,
 				Color.GREEN,
 				Color.CYAN};

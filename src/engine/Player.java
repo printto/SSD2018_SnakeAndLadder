@@ -25,5 +25,17 @@ public class Player {
 	public Piece getPiece(){
 		return piece;
 	}
+	
+	public void freeze(){
+		piece.freeze();
+	}
+	
+	public void unfreeze(){
+		piece.unfreeze();
+	}
+	
+	public boolean isFreeze(){
+		return piece.isFreeze();
+	}
 
 }

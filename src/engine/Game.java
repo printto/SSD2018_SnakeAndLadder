@@ -21,7 +21,7 @@ public class Game extends Observable{
 			board.addPiece(players.get(i).getPiece(), 0);
 		}
 		ended = false;
-		initWarp();
+		initTraps();
 	}
 
 	public boolean isEnded() { return ended; }
@@ -66,12 +66,20 @@ public class Game extends Observable{
 	}
 
 	public int currentPlayerRollDice(){
-		int temp = currentPlayer().roll(die);
+		int temp = 0;
 		if(!ended){
+			temp = currentPlayer().roll(die);
 			setChanged();
 			notifyObservers(ObserverCodes.DIE_ROLLED_STRING);
 		}
 		return temp;
+	}
+	
+	public void checkCurrentPlayerFreeze(){
+		if(currentPlayer().isFreeze()){
+			setChanged();
+			notifyObservers(ObserverCodes.FREEZE_STRING);
+		}
 	}
 
 	public Board getBoard(){
@@ -86,7 +94,7 @@ public class Game extends Observable{
 		return players;
 	}
 
-	private void initWarp() {
+	private void initTraps() {
 		board.addWarp(4, 19);
 		board.addWarp(9, 25);
 		board.addWarp(14, 30);
@@ -99,6 +107,14 @@ public class Game extends Observable{
 		board.addWarp(43, 29);
 		board.addWarp(59, 25);
 		board.addWarp(61, 29);
+		board.addTrap(10, Square.REVERSE);
+		board.addTrap(19, Square.FREEZE);
+		board.addTrap(23, Square.REVERSE);
+		board.addTrap(31, Square.FREEZE);
+		board.addTrap(34, Square.REVERSE);
+		board.addTrap(37, Square.FREEZE);
+		board.addTrap(45, Square.FREEZE);
+		board.addTrap(52, Square.REVERSE);
 	}
 	
 	public boolean currentPlayerIsAtWarp(){

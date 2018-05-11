@@ -1,11 +1,14 @@
 package GUI;
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import engine.Game;
@@ -14,7 +17,7 @@ import engine.Player;
 public class MainFrame extends JFrame{
 	
 	Game game;
-	JButton restartBtn = new JButton("Play again~!");
+	JButton restartBtn = new JButton("Restart");
 	JButton quitBtn = new JButton("Quit");
 	JPanel south;
 
@@ -30,6 +33,10 @@ public class MainFrame extends JFrame{
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());
 		this.setResizable(false);
+		JPanel north = new JPanel((LayoutManager) new FlowLayout(FlowLayout.LEFT));
+		north.add(new JLabel("Current player: "), BorderLayout.NORTH);
+		north.add(controllerUI.getPlayerPanel());
+		this.add(north, BorderLayout.NORTH);
 		JPanel center = new JPanel();
 		center.add(boardUI);
 		this.add(center,BorderLayout.CENTER);

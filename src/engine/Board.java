@@ -25,6 +25,9 @@ public class Board {
 			newPos = squares.length - 1;
 		}
 		addPiece(piece, newPos);
+		if(squares[newPos].getMode() == Square.FREEZE){
+			piece.freeze();
+		}
 	}
 
 	public int getPiecePosition(Piece piece){
@@ -59,6 +62,10 @@ public class Board {
 	
 	public Warp getWarpInSquare(int position){
 		return squares[position].getWarp();
+	}
+	
+	public void addTrap(int position, int mode){
+		squares[position].setMode(mode);
 	}
 
 }
