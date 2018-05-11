@@ -18,6 +18,11 @@ Apart from typical Snake and Ladder, there are 2 special types of squares.
 - Ice Freezing Square : If a player lands on this square, he/she skips one turn.
 - Reverse Square : If a player lands on this square, he/she rolls a die and move backward according to the die's face.
 
+## Installation
+1. [Click here](https://github.com/printto/SSD2018_SnakeAndLadder/blob/master/SnakeAndLadder.zip?raw=true) to download the runnable program zip file.
+2. Extract the downloaded file.
+3. Start the program from SnakeAndLadder.jar
+
 ## Group members
 - Pappim Pipatkasrira
 - Charin Tantrakul
