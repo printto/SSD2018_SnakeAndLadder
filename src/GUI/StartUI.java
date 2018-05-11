@@ -13,12 +13,23 @@ import javax.swing.JPanel;
 
 import engine.Game;
 
+/**
+ * Start screen of the game GUI.
+ * This object handles the game setup and initialize the GUI.
+ * This object is the main class of the game.
+ * @author Pappim Pipatkasrira
+ * @version 1.0
+ * @since May 12, 2018
+ */
 public class StartUI extends JFrame {
 	
-	JButton twoPlayer;
-	JButton threePlayer;
-	JButton fourPlayer;
+	private JButton twoPlayer;
+	private JButton threePlayer;
+	private JButton fourPlayer;
 
+	/**
+	 * Create game GUI.
+	 */
 	public StartUI(){
 		initComponents();
 	}
@@ -52,13 +63,22 @@ public class StartUI extends JFrame {
 		this.setLocationRelativeTo(null);
 	}
 	
+	/**
+	 * Make GUI visible.
+	 */
 	public void start(){
 		this.show();
 	}
 	
+	/**
+	 * ActionListener of the player amount selecting buttons.
+	 * @author Pappim Pipatkasrira
+	 * @version 1.0
+	 * @since May 12, 2018
+	 */
 	class GameCreateListener implements ActionListener{
-		int player = 0;
-		public GameCreateListener(int player){
+		private int player = 0;
+		private GameCreateListener(int player){
 			this.player = player;
 		}
 		@Override
@@ -70,6 +90,10 @@ public class StartUI extends JFrame {
 		}
 	}
 	
+	/**
+	 * Main of the program.
+	 * @param args
+	 */
 	public static void main(String[] args){
 		StartUI ui = new StartUI();
 		ui.start();

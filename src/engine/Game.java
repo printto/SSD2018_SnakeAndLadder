@@ -3,15 +3,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+/**
+ * This object is the main engine of the snake and ladder game.
+ * This object is responsible for handling board and players.
+ * @author Pappim Pipatkasrira
+ * @version 1.0
+ * @since May 11, 2018
+ */
 public class Game extends Observable{
 
-	ArrayList<Player> players;
+	private ArrayList<Player> players;
 	private Die die;
 	private Board board;
 
 	private int currentPlayerIndex = 0;
 	private boolean ended = false;
 
+	/**
+	 * Creates a snake and ladder game.
+	 * @param playersAmount The amount of the players.
+	 */
 	public Game(int playersAmount){
 		die = new Die();
 		board = new Board();
@@ -24,10 +35,22 @@ public class Game extends Observable{
 		initTraps();
 	}
 
+	/**
+	 * Check if the game ended.
+	 * @return <code>true</code> if the game is ended;
+	 * <code>false</code> otherwise.
+	 */
 	public boolean isEnded() { return ended; }
 
+	/**
+	 * End the game.
+	 */
 	public void end() { ended  = true; }
 
+	/**
+	 * Get current player of the current turn.
+	 * @return Player in the current turn
+	 */
 	public Player currentPlayer(){ return players.get(currentPlayerIndex); }
 
 	public void switchPlayer(){
@@ -36,14 +59,26 @@ public class Game extends Observable{
 		notifyObservers(ObserverCodes.PLAYER_CHANGED_STRING);
 	}
 
+	/**
+	 * Get the name of the current player.
+	 * @return Name of the current player.
+	 */
 	public String currentPlayerName(){
 		return currentPlayer().getName();
 	}
 
+	/**
+	 * Get position of the current player.
+	 * @return Position of the current player.
+	 */
 	public int currentPlayerPosition(){
 		return board.getPiecePosition(currentPlayer().getPiece());
 	}
 
+	/**
+	 * Move the current player's piece by steps.
+	 * @param steps Steps to move.
+	 */
 	public void currentPlayerMovePiece(int steps){
 		currentPlayer().movePiece(board, steps);
 		setChanged();
@@ -52,7 +87,11 @@ public class Game extends Observable{
 			end();
 		}
 	}
-	
+
+	/**
+	 * Move the current player's piece by warp.
+	 * @param warp Warp that the player is stepping on.
+	 */
 	public void currentPlayerWarp(Warp warp){
 		setChanged();
 		notifyObservers(ObserverCodes.PLAYER_WARP_STRING);
@@ -61,10 +100,20 @@ public class Game extends Observable{
 		notifyObservers(ObserverCodes.BOARD_UPDATED_STRING);
 	}
 
-	public boolean currentPlayerWins(){
+	/**
+	 * Check if the current player wins.
+	 * @return <code>true</code> if the current player wins;
+	 * <code>false</code> otherwise.
+	 */
+	public boolean isCurrentPlayerWins(){
 		return board.pieceIsAtGoal(currentPlayer().getPiece());
 	}
 
+	/**
+	 * Current player roll a die.
+	 * @return Face of the die;
+	 * 0 if the game is ended.
+	 */
 	public int currentPlayerRollDice(){
 		int temp = 0;
 		if(!ended){
@@ -74,7 +123,10 @@ public class Game extends Observable{
 		}
 		return temp;
 	}
-	
+
+	/**
+	 * Notify observer if the current player has the special buff.
+	 */
 	public void checkCurrentPlayerStatus(){
 		if(currentPlayer().isFreeze()){
 			setChanged();
@@ -86,18 +138,33 @@ public class Game extends Observable{
 		}
 	}
 
+	/**
+	 * Returns board of the game.
+	 * @return Board of the game.
+	 */
 	public Board getBoard(){
 		return board;
 	}
 
+	/**
+	 * Returns face of the die.
+	 * @return Face of the die.
+	 */
 	public int getDieFace(){
 		return die.getFace();
 	}
 
+	/**
+	 * Returns list of the players.
+	 * @return ArrayList of the players.
+	 */
 	public ArrayList<Player> getPlayers(){
 		return players;
 	}
 
+	/**
+	 * Initialize snakes, ladders and ability to the squares.
+	 */
 	private void initTraps() {
 		board.addWarp(4, 19);
 		board.addWarp(9, 25);
@@ -122,11 +189,20 @@ public class Game extends Observable{
 		board.addTrap(45, Square.FREEZE);
 		board.addTrap(52, Square.REVERSE);
 	}
-	
+
+	/**
+	 * Check if current player is at snake, ladder or warp.
+	 * @return <code>true</code> if the current player is at any snake, ladder or warp;
+	 * <code>false</code> otherwise.
+	 */
 	public boolean currentPlayerIsAtWarp(){
 		return board.pieceIsAtWarp(currentPlayer().getPiece());
 	}
-	
+
+	/**
+	 * Get snake or ladder from the current player position;
+	 * @return Warp at the current position.
+	 */
 	public Warp getWarpAtCurrentPosition(){
 		return board.getWarpInSquare(currentPlayerPosition());
 	}

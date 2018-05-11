@@ -25,19 +25,29 @@ import engine.Game;
 import engine.ObserverCodes;
 import engine.Player;
 
+/**
+ * This is the board UI of the game.
+ * @author Pappim Pipatkasrira
+ * @version 1.0
+ * @since May 11, 2018
+ */
 public class BoardPanel extends JPanel implements Observer{
 
 	private Game game;
-	JPanel[] panels = new JPanel[64];
+	private JPanel[] panels = new JPanel[64];
 	//	JLabel[] numLabel = new JLabel[64];
-	JLabel[] playerLabel;
+	private JLabel[] playerLabel;
 
+	/**
+	 * Create board panel
+	 * @param game Game to link with the board.
+	 */
 	public BoardPanel(Game game){
 		this.game = game;
 		game.addObserver(this);
 		initComponents();
 	}
-
+	
 	private void initComponents() {
 		this.setLayout(new GridLayout(8,8));
 		this.setPreferredSize(new Dimension(400,400));
@@ -74,6 +84,9 @@ public class BoardPanel extends JPanel implements Observer{
 		}
 	}
 
+	/**
+	 * Update informations displayed on the board.
+	 */
 	public void updateBoard(){
 		clearPanel();
 		for(int i = 63 ; i >= 56 ; i--){
@@ -103,7 +116,7 @@ public class BoardPanel extends JPanel implements Observer{
 		this.revalidate();
 		this.repaint();
 	}
-
+	
 	private void addPanel(int i){
 		//		panels[i].add(numLabel[i]);
 		for(Player player: game.getPlayers()){

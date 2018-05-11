@@ -1,5 +1,12 @@
 package engine;
 
+/**
+ * This class is for storing the codes to use with the Observers.
+ * The Strings here is use for communicating Observer and Observable objects.
+ * @author Pappim Pipatkasrira
+ * @version 1.0
+ * @since May 11, 2018
+ */
 public class ObserverCodes {
 
 	final public static String DIE_ROLLED_STRING = "die_rolled";

@@ -14,12 +14,24 @@ import javax.swing.SwingConstants;
 
 import engine.Game;
 
+/**
+ * This object is a panel with Roll Die button.
+ * This object is responsible for roll die button with action listener.
+ * At first, this object is also responsible for storing the previous rolled faces of the die.
+ * @author Pappim Pipatkasrira
+ * @version 1.0
+ * @since May 12, 2018
+ */
 public class DiePanel extends JPanel{
 	
-	Game game;
-	JLabel number = new JLabel("Last roll: 0", SwingConstants.CENTER);
-	JButton roll_btn;
+	private Game game;
+	private JLabel number = new JLabel("Last roll: 0", SwingConstants.CENTER);
+	private JButton roll_btn;
 	
+	/**
+	 * Create a die panel.
+	 * @param game Game to link with this die panel.
+	 */
 	public DiePanel(Game game){
 		this.game = game;
 		initComponents();
@@ -34,6 +46,12 @@ public class DiePanel extends JPanel{
 		this.add(roll_btn);
 	}
 	
+	/**
+	 * Roll die button action listener.
+	 * @author Pappim Pipatkasrira
+	 * @version 1.0
+	 * @since May 12, 2018
+	 */
 	class rollDie implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {

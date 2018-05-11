@@ -17,20 +17,41 @@ import javax.swing.JTextArea;
 import engine.Game;
 import engine.ObserverCodes;
 
-public class ControllerPanel extends JPanel implements Observer{
+/**
+ * This object is responsible for controlling the game flows.
+ * This object also acted as a JPanel so it can be used as a GUI.
+ * This object is mainly control the game steps and link it to the GUI.
+ * @author Pappim Pipatkasrira
+ * @version 1.0
+ * @since May 11, 2018
+ */
+public class Controller extends JPanel implements Observer{
 
-	Game game;
-	MainFrame frame;
-	JTextArea textArea = new JTextArea("");
-	PlayerPanel playerPanel = new PlayerPanel();
+	private Game game;
+	private MainFrame frame;
+	private JTextArea textArea = new JTextArea("");
+	private PlayerPanel playerPanel = new PlayerPanel();
 	
-	public ControllerPanel(MainFrame frame , Game game){
+	/**
+	 * Create control panel to link with the main frame.
+	 * @param frame Main frame of the snake and ladder game.
+	 * @param game Game to control.
+	 */
+	public Controller(MainFrame frame , Game game){
 		this.frame = frame;
 		this.game = game;
 		game.addObserver(this);
 		initComponents();
 	}
-
+	
+	/**
+	 * Create control panel without linking to any main frame.
+	 * @param game Game to control.
+	 */
+	public Controller(Game game){
+		this(new MainFrame(game) , game);
+	}
+	
 	private void initComponents() {
 		JScrollPane pane = new JScrollPane(textArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		textArea.setWrapStyleWord(true);
@@ -66,7 +87,6 @@ public class ControllerPanel extends JPanel implements Observer{
 			}
 			if(temp.equals(ObserverCodes.FREEZE_STRING)){
 				textArea.append(game.currentPlayerName() + " is frozen.\n");
-				game.switchPlayer();
 			}
 			if(temp.equals(ObserverCodes.REVERSE_STRING)){
 				textArea.append(game.currentPlayerName() + " stepped on reverse buff.\n");
@@ -89,20 +109,30 @@ public class ControllerPanel extends JPanel implements Observer{
 		textArea.setCaretPosition(textArea.getDocument().getLength());
 	}
 	
-	public void infoBox(String infoMessage, String titleBar) {
+	private void infoBox(String infoMessage, String titleBar) {
         JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);
     }
 	
+	/**
+	 * Get another JPanel that displays the current player.
+	 * @return JPanel that displays the current player.
+	 */
 	public JPanel getPlayerPanel(){
 		return playerPanel;
 	}
 	
+	/**
+	 * Panel that displays the current player.
+	 * @author Pappim Pipatkasrira
+	 * @version 1.0
+	 * @since May 12, 2018
+	 */
 	class PlayerPanel extends JPanel{
 		
 		JLabel currentPlayer = new JLabel("P1");
 		Font font  = new Font("serif",Font.BOLD,30);
 		
-		public PlayerPanel(){
+		private PlayerPanel(){
 			initPlayerPanel();
 		}
 
@@ -111,7 +141,7 @@ public class ControllerPanel extends JPanel implements Observer{
 			currentPlayer.setFont(font);
 		}
 		
-		public void update(){
+		private void update(){
 			String temp = game.currentPlayerName();
 			switch(temp){
 			case "P1":

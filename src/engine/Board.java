@@ -1,10 +1,21 @@
 package engine;
+
+/**
+ * This is Board class for snake and ladder game.
+ * @author Pappim Pipatkasrira
+ * @version 1.0
+ * @since May 11, 2018
+ */
 public class Board {
 
+	//Size need to be n^2
 	public static final int SIZE = 64;
 
 	private Square [] squares;
 
+	/**
+	 * Creates the snake and ladder board.
+	 */
 	public Board(){
 		squares = new Square[SIZE];
 		for(int i = 0 ; i < squares.length ; i++){
@@ -13,10 +24,20 @@ public class Board {
 		squares[squares.length - 1].setGoal(true);
 	}
 
-	public void addPiece(Piece piece , int pos){
-		squares[pos].addPiece(piece);
+	/**
+	 * Add piece to the specific square.
+	 * @param piece The piece to add to the position.
+	 * @param position Position to add the piece.
+	 */
+	public void addPiece(Piece piece , int position){
+		squares[position].addPiece(piece);
 	}
 
+	/**
+	 * Move piece by amount of the steps.
+	 * @param piece The piece to move.
+	 * @param steps amount of steps.
+	 */
 	public void movePiece(Piece piece , int steps){
 		int pos = getPiecePosition(piece);
 		squares[pos].removePiece(piece);
@@ -33,6 +54,11 @@ public class Board {
 		}
 	}
 
+	/**
+	 * Get position of the piece.
+	 * @param piece The piece to get the position.
+	 * @return Position of the piece.
+	 */
 	public int getPiecePosition(Piece piece){
 		for(Square s : squares){
 			if(s.hasPiece(piece)){
@@ -42,18 +68,39 @@ public class Board {
 		return -1;
 	}
 
+	/**
+	 * Check if the piece is at goal.
+	 * @param piece The piece to check.
+	 * @return <code>true</code> if the piece is at goal.;
+	 * <code>false</code> otherwise.
+	 */
 	public boolean pieceIsAtGoal(Piece piece){
 		return squares[getPiecePosition(piece)].isGoal();
 	}
 	
+	/**
+	 * Check if the piece is at warp.
+	 * @param piece The piece to check.
+	 * @return <code>true</code> if the piece is at warp.;
+	 * <code>false</code> otherwise.
+	 */
 	public boolean pieceIsAtWarp(Piece piece){
 		return squares[getPiecePosition(piece)].hasWarp();
 	}
 	
+	/**
+	 * Returns all squares on the board.
+	 * @return Array of all the squares on the board.
+	 */
 	public Square[] getSquares(){
 		return squares;
 	}
 	
+	/**
+	 * Add snake or ladder to the board.
+	 * @param position The initial position of the snake/ladder.
+	 * @param destination Destination position of the snake/ladder.
+	 */
 	public void addWarp(int position, int destination){
 		if(position < destination){
 			squares[position].setWarp(new Warp(destination,Warp.LADDER));
@@ -63,10 +110,20 @@ public class Board {
 		}
 	}
 	
+	/**
+	 * Get snake/ladder from the square.
+	 * @param position Position of the square.
+	 * @return Snake or ladder (or warp) in the square.
+	 */
 	public Warp getWarpInSquare(int position){
 		return squares[position].getWarp();
 	}
 	
+	/**
+	 * Adds special ability to the square.
+	 * @param position Position of the square to add the ability.
+	 * @param mode Ability of the square.
+	 */
 	public void addTrap(int position, int mode){
 		squares[position].setMode(mode);
 	}

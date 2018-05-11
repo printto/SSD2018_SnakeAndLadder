@@ -4,7 +4,6 @@ import java.awt.FlowLayout;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,15 +12,25 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import engine.Game;
-import engine.Player;
 
+/**
+ * This object is a main frame of the game.
+ * This object is responsible for combining all the game components together.
+ * @author Pappim Pipatkasrira
+ * @version 1.0
+ * @since May 12, 2018
+ */
 public class MainFrame extends JFrame{
 	
-	Game game;
-	JButton restartBtn;
-	JButton quitBtn;
-	JPanel south;
+	private Game game;
+	private JButton restartBtn;
+	private JButton quitBtn;
+	private JPanel south;
 
+	/**
+	 * Create a main frame of the game.
+	 * @param game Game to play on the main frame.
+	 */
 	public MainFrame(Game game){
 		this.game = game;
 		initComponents();
@@ -30,7 +39,7 @@ public class MainFrame extends JFrame{
 	private void initComponents() {
 		BoardPanel boardUI = new BoardPanel(game);
 		DiePanel dieUI = new DiePanel(game);
-		ControllerPanel controllerUI = new ControllerPanel(this,game);
+		Controller controllerUI = new Controller(this,game);
 		ImageIcon restartbtnImg = new ImageIcon(this.getClass().getResource("/img/restartbtn.png"));
 		restartBtn = new JButton(restartbtnImg);
 		ImageIcon quitbtnImg = new ImageIcon(this.getClass().getResource("/img/quitbtn.png"));
@@ -59,10 +68,16 @@ public class MainFrame extends JFrame{
 		this.setLocationRelativeTo(null);
 	}
 	
+	/**
+	 * Make the main frame visible.
+	 */
 	public void start(){
 		this.show();
 	}
 	
+	/**
+	 * When it ends, there's no more die rolling.
+	 */
 	public void end(){
 		this.remove(south);
 		south = new JPanel();
@@ -72,13 +87,19 @@ public class MainFrame extends JFrame{
 		pack();
 	}
 	
+	/**
+	 * End game buttons listener.
+	 * @author Pappim Pipatkasrira
+	 * @version 1.0
+	 * @since May 12, 2018
+	 */
 	class EndListener implements ActionListener{
 		
-		final public static int RESTART = 0;
-		final public static int QUIT = 1;
-		int mode;
+		final private static int RESTART = 0;
+		final private static int QUIT = 1;
+		private int mode;
 		
-		public EndListener(int mode){
+		private EndListener(int mode){
 			this.mode = mode;
 		}
 		
