@@ -17,3 +17,7 @@ Apart from typical Snake and Ladder, there are 2 special types of squares.
 - Pappim Pipatkasrira
 - Charin Tantrakul
 - Pasut Kittiprapas
+
+## Reference
+- [Read more about Snake and Ladder](https://en.wikipedia.org/wiki/Snakes_and_Ladders)
+- [Project assignment repository](https://github.com/KeeUka/SSD_2018_Final)
