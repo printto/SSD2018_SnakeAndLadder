@@ -48,7 +48,11 @@ public class BoardPanel extends JPanel implements Observer{
 	private void initColor() {
 		Font font = new Font("Courier", Font.BOLD,15);
 		playerLabel = new JLabel[game.getPlayers().size()];
-		Color[] colors = {Color.red,Color.BLUE,Color.GREEN,Color.CYAN};
+		Color[] colors = {
+				Color.red,
+				Color.BLUE,
+				Color.GREEN,
+				Color.CYAN};
 		for(int i = 0 ; i < playerLabel.length ; i++){
 			playerLabel[i] = new JLabel(game.getPlayers().get(i).getName());
 			playerLabel[i].setForeground(colors[i]);

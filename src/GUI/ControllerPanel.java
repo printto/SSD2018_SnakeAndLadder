@@ -53,6 +53,7 @@ public class ControllerPanel extends JPanel implements Observer{
 				}
 				else if(game.currentPlayerIsAtWarp()){
 					game.currentPlayerWarp(game.getWarpAtCurrentPosition());
+					game.switchPlayer();
 				}
 				else{
 					game.switchPlayer();
