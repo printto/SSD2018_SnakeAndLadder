@@ -27,7 +27,7 @@ Apart from typical Snake and Ladder, there are 2 special types of squares.
 ![Domain Model](https://github.com/printto/SSD2018_SnakeAndLadder/blob/master/Diagrams/Domain%20Model.png?raw=true)
 
 ## UML Diagram
-![UML Diagram](https://github.com/printto/SSD2018_SnakeAndLadder/blob/master/Diagrams/UML.png?raw=true)
+![UML Diagram](https://github.com/printto/SSD2018_SnakeAndLadder/blob/master/Diagrams/UML.jpg?raw=true)
 
 ## Group members
 - Pappim Pipatkasrira
