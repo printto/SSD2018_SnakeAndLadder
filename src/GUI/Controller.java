@@ -101,10 +101,11 @@ public class Controller extends JPanel implements Observer {
 					game.currentPlayerWarp(warp);
 				}
 				if (game.isEnded()) {
+					ac.winSound();
 					textArea.append("\n" + game.currentPlayerName() + " wins~!\n");
 					infoBox("Player " + game.currentPlayerName() + " wins~!", "Game ended!");
 					frame.end();
-				} else if (game.getDieFace() != 6 && !game.currentPlayer().isReverse()) {
+				} else if (game.currentPlayer().isFreeze() || (game.getDieFace() != 6 && !game.currentPlayer().isReverse())) {
 					game.switchPlayer();
 				}
 			}

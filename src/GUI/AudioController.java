@@ -66,6 +66,10 @@ public class AudioController {
 		playEffect("Sound/backward.wav");
 	}
 	
+	public void winSound(){
+		playEffect("Sound/win.wav");
+	}
+	
 	public void playEffect(String path){
 		try {
 			Clip clip = AudioSystem.getClip();
