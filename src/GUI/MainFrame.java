@@ -107,9 +107,12 @@ public class MainFrame extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 			if(mode == RESTART){
 				new StartUI().start();
+				setVisible(false);
+				dispose();
 			}
-			setVisible(false);
-			dispose();
+			if(mode == QUIT){
+				System.exit(0);
+			}
 		}
 	}
 	
