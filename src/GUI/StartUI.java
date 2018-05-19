@@ -33,7 +33,7 @@ public class StartUI extends JFrame {
 	 */
 	public StartUI(){
 		initComponents();
-		ac.startGame();
+		ac.startSound();
 	}
 
 	private void initComponents() {

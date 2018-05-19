@@ -15,72 +15,66 @@ import sun.audio.AudioStream;
 
 public class AudioController {
 
-	public void startGame(){
-		playEffect("Sound/GameStart.wav");
+	public void startSound(){
+		playSound("Sound/GameStart.wav",0);
 	}
-	
+
 	public void diceSound(int face) {
-		try {
-			Clip clip = AudioSystem.getClip();
-			switch(face){
-			case 1 : 
-				clip.open(AudioSystem.getAudioInputStream(new File("Sound/dice01.wav")));
-				break;
-			case 2 : 
-				clip.open(AudioSystem.getAudioInputStream(new File("Sound/dice02.wav")));
-				break;
-			case 3 : 
-				clip.open(AudioSystem.getAudioInputStream(new File("Sound/dice03.wav")));
-				break;
-			case 4 : 
-				clip.open(AudioSystem.getAudioInputStream(new File("Sound/dice04.wav")));
-				break;
-			case 5 : 
-				clip.open(AudioSystem.getAudioInputStream(new File("Sound/dice05.wav")));
-				break;
-			case 6 : 
-				clip.open(AudioSystem.getAudioInputStream(new File("Sound/dice06.wav")));
-				break;
-			default :
-				clip.open(AudioSystem.getAudioInputStream(new File("Sound/dice01.wav")));
-			}
-			clip.start();
-		} catch (Exception e) {
-			System.err.println("Can't play dice audio file.");
+		switch(face){
+		case 1 : 
+			playSound("Sound/dice01.wav",0);
+			break;
+		case 2 : 
+			playSound("Sound/dice02.wav",0);
+			break;
+		case 3 : 
+			playSound("Sound/dice03.wav",0);
+			break;
+		case 4 : 
+			playSound("Sound/dice04.wav",0);
+			break;
+		case 5 : 
+			playSound("Sound/dice05.wav",0);
+			break;
+		case 6 : 
+			playSound("Sound/dice06.wav",0);
+			break;
+		default :
+			playSound("Sound/dice01.wav",0);
 		}
 	}
-	
+
 	public void snakeSound(){
-		playEffect("Sound/snake.wav");
+		playSound("Sound/snake.wav",1000);
 	}
-	
+
 	public void ladderSound(){
-		playEffect("Sound/ladder.wav");
+		playSound("Sound/ladder.wav",1000);
 	}
-	
+
 	public void freezeSound(){
-		playEffect("Sound/freeze.wav");
+		playSound("Sound/freeze.wav",1000);
 	}
-	
+
 	public void reverseSound(){
-		playEffect("Sound/backward.wav");
+		playSound("Sound/backward.wav",1000);
 	}
-	
+
 	public void winSound(){
-		playEffect("Sound/win.wav");
+		playSound("Sound/win.wav",1000);
 	}
-	
-	public void playEffect(String path){
+
+	public void playSound(String path,int sleepTime){
 		try {
 			Clip clip = AudioSystem.getClip();
 			clip.open(AudioSystem.getAudioInputStream(new File(path)));
 			clip.start();
-			sleepThread(1000);
+			sleepThread(sleepTime);
 		} catch (Exception e) {
 			System.err.println("Can't play audio file.");
 		}
 	}
-	
+
 	public void sleepThread(int millsec){
 		try {
 			TimeUnit.MILLISECONDS.sleep(millsec);
@@ -88,5 +82,5 @@ public class AudioController {
 			System.err.println("Can't sleep audio thread.");
 		}
 	}
-	
+
 }
