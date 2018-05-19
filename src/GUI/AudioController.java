@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.LineUnavailableException;
 
 import engine.Game;
@@ -17,6 +18,18 @@ public class AudioController {
 
 	public void startSound(){
 		playSound("Sound/GameStart.wav",0);
+	}
+	
+	public void bgmStart(){
+		try {
+			Clip clip = AudioSystem.getClip();
+			clip.open(AudioSystem.getAudioInputStream(new File("Sound/GameWaitting.wav")));
+			FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);        
+		    gainControl.setValue(20f * (float) Math.log10(0.1));
+		    clip.loop(Clip.LOOP_CONTINUOUSLY);
+		} catch (Exception e) {
+			System.err.println("Can't play BGM file.");
+		}
 	}
 
 	public void diceSound(int face) {

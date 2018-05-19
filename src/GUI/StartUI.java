@@ -97,6 +97,7 @@ public class StartUI extends JFrame {
 	 * @param args
 	 */
 	public static void main(String[] args){
+		new AudioController().bgmStart();
 		StartUI ui = new StartUI();
 		ui.start();		
 	}
