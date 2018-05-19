@@ -75,7 +75,7 @@ public class AudioController {
 		}
 	}
 
-	public void sleepThread(int millsec){
+	private void sleepThread(int millsec){
 		try {
 			TimeUnit.MILLISECONDS.sleep(millsec);
 		} catch (InterruptedException e) {
