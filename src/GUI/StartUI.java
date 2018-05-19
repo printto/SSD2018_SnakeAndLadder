@@ -26,12 +26,14 @@ public class StartUI extends JFrame {
 	private JButton twoPlayer;
 	private JButton threePlayer;
 	private JButton fourPlayer;
+	private AudioController ac = new AudioController();
 
 	/**
 	 * Create game GUI.
 	 */
 	public StartUI(){
 		initComponents();
+		ac.startGame();
 	}
 
 	private void initComponents() {
@@ -96,7 +98,7 @@ public class StartUI extends JFrame {
 	 */
 	public static void main(String[] args){
 		StartUI ui = new StartUI();
-		ui.start();
+		ui.start();		
 	}
 	
 }
