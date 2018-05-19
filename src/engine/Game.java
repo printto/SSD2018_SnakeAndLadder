@@ -102,7 +102,8 @@ public class Game extends Observable{
 	 * <code>false</code> otherwise.
 	 */
 	public boolean isCurrentPlayerWins(){
-		return board.pieceIsAtGoal(currentPlayer().getPiece());
+		ended = board.pieceIsAtGoal(currentPlayer().getPiece());
+		return ended;
 	}
 
 	/**

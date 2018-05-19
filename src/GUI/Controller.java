@@ -97,7 +97,7 @@ public class Controller extends JPanel implements Observer {
 					game.currentPlayerWarp(warp);
 					textArea.append(game.currentPlayerName() + " moved to " + game.currentPlayerPosition() + "\n");
 				}
-				if (game.isEnded()) {
+				if (game.isCurrentPlayerWins()) {
 					ac.winSound();
 					textArea.append("\n" + game.currentPlayerName() + " wins~!\n");
 					infoBox("Player " + game.currentPlayerName() + " wins~!", "Game ended!");
