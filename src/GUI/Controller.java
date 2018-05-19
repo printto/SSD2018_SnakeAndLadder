@@ -23,6 +23,7 @@ import sun.audio.*;
 
 import engine.Game;
 import engine.ObserverCodes;
+import engine.Warp;
 
 /**
  * This object is responsible for controlling the game flows. This object also
@@ -90,7 +91,14 @@ public class Controller extends JPanel implements Observer {
 				ac.diceSound(game.getDieFace());
 				game.checkCurrentPlayerStatus();
 				if (game.currentPlayerIsAtWarp()) {
-					game.currentPlayerWarp(game.getWarpAtCurrentPosition());
+					Warp warp = game.getWarpAtCurrentPosition();
+					if(warp.toString().equals("snake")){
+						ac.snakeSound();
+					}
+					else{
+						ac.ladderSound();
+					}
+					game.currentPlayerWarp(warp);
 				}
 				if (game.isEnded()) {
 					textArea.append("\n" + game.currentPlayerName() + " wins~!\n");

@@ -20,7 +20,6 @@ public class AudioController {
 			Clip clip = AudioSystem.getClip();
 			clip.open(AudioSystem.getAudioInputStream(new File("Sound/GameStart.wav")));
 			clip.start();
-			sleepThread(3000);
 		} catch (Exception e) {
 			
 		}
@@ -53,8 +52,6 @@ public class AudioController {
 				clip.open(AudioSystem.getAudioInputStream(new File("Sound/dice01.wav")));
 			}
 			clip.start();
-			sleepThread(600);
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
