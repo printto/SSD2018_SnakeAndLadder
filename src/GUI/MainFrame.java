@@ -45,6 +45,7 @@ public class MainFrame extends JFrame{
 		ImageIcon quitbtnImg = new ImageIcon(this.getClass().getResource("/img/quitbtn.png"));
 		quitBtn = new JButton(quitbtnImg);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setTitle("Snake and Ladder");
 		this.setLayout(new BorderLayout());
 		this.setResizable(false);
 		JPanel north = new JPanel((LayoutManager) new FlowLayout(FlowLayout.LEFT));

@@ -37,6 +37,7 @@ public class StartUI extends JFrame {
 	}
 
 	private void initComponents() {
+		this.setTitle("Snake and Ladder");
 		JPanel wrapup = new JPanel();
 		wrapup.setLayout(new BoxLayout(wrapup,BoxLayout.Y_AXIS));
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
