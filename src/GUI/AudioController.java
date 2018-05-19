@@ -16,19 +16,12 @@ import sun.audio.AudioStream;
 public class AudioController {
 
 	public void startGame(){
-		try {
-			Clip clip = AudioSystem.getClip();
-			clip.open(AudioSystem.getAudioInputStream(new File("Sound/GameStart.wav")));
-			clip.start();
-		} catch (Exception e) {
-			
-		}
+		playEffect("Sound/GameStart.wav");
 	}
 	
 	public void diceSound(int face) {
 		try {
 			Clip clip = AudioSystem.getClip();
-			
 			switch(face){
 			case 1 : 
 				clip.open(AudioSystem.getAudioInputStream(new File("Sound/dice01.wav")));
@@ -53,52 +46,34 @@ public class AudioController {
 			}
 			clip.start();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println("Can't play dice audio file.");
 		}
-
 	}
 	
 	public void snakeSound(){
-		try {
-			Clip clip = AudioSystem.getClip();
-			clip.open(AudioSystem.getAudioInputStream(new File("Sound/snake.wav")));
-			clip.start();
-			sleepThread(1000);
-		} catch (Exception e) {
-			
-		}
+		playEffect("Sound/snake.wav");
 	}
 	
 	public void ladderSound(){
-		try {
-			Clip clip = AudioSystem.getClip();
-			clip.open(AudioSystem.getAudioInputStream(new File("Sound/ladder.wav")));
-			clip.start();
-			sleepThread(1000);
-		} catch (Exception e) {
-			
-		}
+		playEffect("Sound/ladder.wav");
 	}
 	
 	public void freezeSound(){
-		try {
-			Clip clip = AudioSystem.getClip();
-			clip.open(AudioSystem.getAudioInputStream(new File("Sound/freeze.wav")));
-			clip.start();
-			sleepThread(1000);
-		} catch (Exception e) {
-			
-		}
+		playEffect("Sound/freeze.wav");
 	}
 	
 	public void reverseSound(){
+		playEffect("Sound/backward.wav");
+	}
+	
+	public void playEffect(String path){
 		try {
 			Clip clip = AudioSystem.getClip();
-			clip.open(AudioSystem.getAudioInputStream(new File("Sound/backward.wav")));
+			clip.open(AudioSystem.getAudioInputStream(new File(path)));
 			clip.start();
 			sleepThread(1000);
 		} catch (Exception e) {
-			
+			System.err.println("Can't play audio file.");
 		}
 	}
 	
@@ -106,7 +81,7 @@ public class AudioController {
 		try {
 			TimeUnit.MILLISECONDS.sleep(millsec);
 		} catch (InterruptedException e) {
-			throw new RuntimeException(e);
+			System.err.println("Can't sleep audio thread.");
 		}
 	}
 	
