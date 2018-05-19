@@ -102,9 +102,11 @@ public class Controller extends JPanel implements Observer {
 			}
 			if (temp.equals(ObserverCodes.FREEZE_STRING)) {
 				textArea.append(game.currentPlayerName() + " is frozen.\n");
+				ac.freezeSound();
 			}
 			if (temp.equals(ObserverCodes.REVERSE_STRING)) {
 				textArea.append(game.currentPlayerName() + " stepped on reverse buff.\n");
+				ac.reverseSound();
 			}
 			if (temp.equals(ObserverCodes.PLAYER_CHANGED_STRING)) {
 				textArea.append("\n" + game.currentPlayerName() + "'s turn.\n");
