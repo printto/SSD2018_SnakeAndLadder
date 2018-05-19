@@ -45,6 +45,7 @@ public class BoardPanel extends JPanel implements Observer{
 	public BoardPanel(Game game){
 		this.game = game;
 		game.addObserver(this);
+		game.getBoard().addObserver(this);
 		initComponents();
 	}
 	
@@ -141,7 +142,7 @@ public class BoardPanel extends JPanel implements Observer{
 	public void update(Observable o, Object arg) {
 		if(arg instanceof String){
 			String temp = (String) arg;
-			if(temp.equals(ObserverCodes.BOARD_UPDATED_STRING)){
+			if(temp.equals(ObserverCodes.WALKING_STRING)){
 				updateBoard();
 			}
 		}

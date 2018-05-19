@@ -53,6 +53,7 @@ public class Controller extends JPanel implements Observer {
 	public Controller(MainFrame frame, Game game) {
 		this.frame = frame;
 		this.game = game;
+		game.getBoard().addObserver(this);
 		game.addObserver(this);
 		initComponents();
 	}
@@ -84,11 +85,6 @@ public class Controller extends JPanel implements Observer {
 			String temp = (String) arg;
 			if (temp.equals(ObserverCodes.BOARD_UPDATED_STRING)) {
 				textArea.append(game.currentPlayerName() + " moved to " + game.currentPlayerPosition() + "\n");
-			}
-			if (temp.equals(ObserverCodes.DIE_ROLLED_STRING)) {
-				textArea.append("Die rolled: " + game.getDieFace() + "\n");
-				game.currentPlayerMovePiece(game.getDieFace());
-				ac.diceSound(game.getDieFace());
 				game.checkCurrentPlayerStatus();
 				if (game.currentPlayerIsAtWarp()) {
 					Warp warp = game.getWarpAtCurrentPosition();
@@ -99,6 +95,7 @@ public class Controller extends JPanel implements Observer {
 						ac.ladderSound();
 					}
 					game.currentPlayerWarp(warp);
+					textArea.append(game.currentPlayerName() + " moved to " + game.currentPlayerPosition() + "\n");
 				}
 				if (game.isEnded()) {
 					ac.winSound();
@@ -108,6 +105,12 @@ public class Controller extends JPanel implements Observer {
 				} else if (game.currentPlayer().isFreeze() || (game.getDieFace() != 6 && !game.currentPlayer().isReverse())) {
 					game.switchPlayer();
 				}
+				frame.getDieUI().setEnable();
+			}
+			if (temp.equals(ObserverCodes.DIE_ROLLED_STRING)) {
+				textArea.append("Die rolled: " + game.getDieFace() + "\n");
+				game.currentPlayerMovePiece(game.getDieFace());
+				ac.diceSound(game.getDieFace());
 			}
 			if (temp.equals(ObserverCodes.FREEZE_STRING)) {
 				textArea.append(game.currentPlayerName() + " is frozen.\n");
@@ -129,7 +132,6 @@ public class Controller extends JPanel implements Observer {
 			}
 			if (temp.equals(ObserverCodes.PLAYER_WARP_STRING)) {
 				textArea.append(game.currentPlayerName() + " met the " + game.getWarpAtCurrentPosition() + "\n");
-				;
 				game.checkCurrentPlayerStatus();
 			}
 		}

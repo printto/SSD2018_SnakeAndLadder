@@ -26,6 +26,7 @@ public class MainFrame extends JFrame{
 	private JButton restartBtn;
 	private JButton quitBtn;
 	private JPanel south;
+	private DiePanel dieUI;
 
 	/**
 	 * Create a main frame of the game.
@@ -35,10 +36,14 @@ public class MainFrame extends JFrame{
 		this.game = game;
 		initComponents();
 	}
+	
+	public DiePanel getDieUI(){
+		return dieUI;
+	}
 
 	private void initComponents() {
 		BoardPanel boardUI = new BoardPanel(game);
-		DiePanel dieUI = new DiePanel(game);
+		dieUI = new DiePanel(game);
 		Controller controllerUI = new Controller(this,game);
 		ImageIcon restartbtnImg = new ImageIcon(this.getClass().getResource("/img/restartbtn.png"));
 		restartBtn = new JButton(restartbtnImg);

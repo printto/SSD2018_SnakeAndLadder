@@ -81,8 +81,6 @@ public class Game extends Observable{
 	 */
 	public void currentPlayerMovePiece(int steps){
 		currentPlayer().movePiece(board, steps);
-		setChanged();
-		notifyObservers(ObserverCodes.BOARD_UPDATED_STRING);
 		if(currentPlayerPosition() == board.getSquares().length - 1){
 			end();
 		}
@@ -95,9 +93,7 @@ public class Game extends Observable{
 	public void currentPlayerWarp(Warp warp){
 		setChanged();
 		notifyObservers(ObserverCodes.PLAYER_WARP_STRING);
-		currentPlayer().movePiece(board, warp.getDestination() - currentPlayerPosition());
-		setChanged();
-		notifyObservers(ObserverCodes.BOARD_UPDATED_STRING);
+		currentPlayer().warpPiece(board, warp.getDestination() - currentPlayerPosition());
 	}
 
 	/**

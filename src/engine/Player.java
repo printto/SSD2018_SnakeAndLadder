@@ -9,10 +9,10 @@ package engine;
  * @since May 11, 2018
  */
 public class Player {
-	
+
 	private String name;
 	private Piece piece;
-	
+
 	/**
 	 * Create player.
 	 * @param name Name of the player.
@@ -21,7 +21,7 @@ public class Player {
 		this.name = name;
 		piece = new Piece();
 	}
-	
+
 	/**
 	 * Player roll a die.
 	 * @param die Die to roll.
@@ -31,7 +31,7 @@ public class Player {
 		die.roll();
 		return die.getFace();
 	}
-	
+
 	/**
 	 * Returns name of the player.
 	 * @return Name of the player.
@@ -39,7 +39,7 @@ public class Player {
 	public String getName(){
 		return name;
 	}
-	
+
 	/**
 	 * Move the piece in the board by steps amount.
 	 * @param board Board to move the piece.
@@ -54,7 +54,16 @@ public class Player {
 			board.movePiece(piece, steps);
 		}
 	}
-	
+
+	/**
+	 * Warp the piece in the board by steps amount.
+	 * @param board Board to move the piece.
+	 * @param steps Steps to walk the piece.
+	 */
+	public void warpPiece(Board board, int steps){
+		board.warpPiece(piece, steps);
+	}
+
 	/**
 	 * Returns the piece of the player.
 	 * @return Player's piece.
@@ -62,21 +71,21 @@ public class Player {
 	public Piece getPiece(){
 		return piece;
 	}
-	
+
 	/**
 	 * Freeze the player's piece.
 	 */
 	public void freeze(){
 		piece.freeze();
 	}
-	
+
 	/**
 	 * Remove Freeze buff from the piece.
 	 */
 	public void unfreeze(){
 		piece.unfreeze();
 	}
-	
+
 	/**
 	 * Check if the piece has the Freeze buff status.
 	 * @return <code>true</code> if the piece has the Freeze buff status;
@@ -85,21 +94,21 @@ public class Player {
 	public boolean isFreeze(){
 		return piece.isFreeze();
 	}
-	
+
 	/**
 	 * Add Reverse status to the piece.
 	 */
 	public void reverse(){
 		piece.reverse();
 	}
-	
+
 	/**
 	 * Remove Reverse status from the piece.
 	 */
 	public void unreverse(){
 		piece.unreverse();
 	}
-	
+
 	/**
 	 * Check if the piece has the Reverse buff status.
 	 * @return <code>true</code> if the piece has the Reverse buff status;
