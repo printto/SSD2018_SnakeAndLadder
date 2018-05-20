@@ -30,7 +30,7 @@ public class AudioController {
 	 * This method play the sound when the gameUI start.
 	 */
 	public void startSound() {
-		playSound("Sound/GameStart.wav", 3000);
+		playSound("Sound/GameStart.wav", 3400);
 	}
 
 	/**
@@ -41,7 +41,7 @@ public class AudioController {
 			Clip clip = AudioSystem.getClip();
 			clip.open(AudioSystem.getAudioInputStream(this.getClass().getResource("/Sound/GameWaitting.wav")));
 			FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-			gainControl.setValue(20f * (float) Math.log10(0.1));
+			gainControl.setValue(15f * (float) Math.log10(0.1));
 			clip.loop(Clip.LOOP_CONTINUOUSLY);
 		} catch (Exception e) {
 			System.err.println("Can't play BGM file.");
