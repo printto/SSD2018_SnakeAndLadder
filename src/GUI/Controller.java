@@ -76,14 +76,15 @@ public class Controller extends JPanel implements Observer {
 		pane.setPreferredSize(new Dimension(200, 400));
 		this.add(pane);
 		textArea.append("Game started with " + game.getPlayers().size() + " players.\n");
-		update(null, ObserverCodes.PLAYER_CHANGED_STRING);
+		update(null, ObserverCodes.PLAYER_CHANGED);
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if (arg instanceof String) {
-			String temp = (String) arg;
-			if (temp.equals(ObserverCodes.BOARD_UPDATED_STRING)) {
+		if (arg instanceof ObserverCodes) {
+			ObserverCodes temp = (ObserverCodes) arg;
+			switch(temp){
+			case BOARD_UPDATED:
 				textArea.append(game.currentPlayerName() + " moved to " + game.currentPlayerPosition() + "\n");
 				game.checkCurrentPlayerStatus();
 				if (game.currentPlayerIsAtWarp()) {
@@ -106,21 +107,21 @@ public class Controller extends JPanel implements Observer {
 					game.switchPlayer();
 				}
 				frame.getDieUI().setEnable();
-			}
-			if (temp.equals(ObserverCodes.DIE_ROLLED_STRING)) {
+				break;
+			case DIE_ROLLED:
 				textArea.append("Die rolled: " + game.getDieFace() + "\n");
 				game.currentPlayerMovePiece(game.getDieFace());
 				ac.diceSound(game.getDieFace());
-			}
-			if (temp.equals(ObserverCodes.FREEZE_STRING)) {
+				break;
+			case PLAYER_FREEZE:
 				textArea.append(game.currentPlayerName() + " is frozen.\n");
 				ac.freezeSound();
-			}
-			if (temp.equals(ObserverCodes.REVERSE_STRING)) {
+				break;
+			case PLAYER_REVERSE:
 				textArea.append(game.currentPlayerName() + " stepped on reverse buff.\n");
 				ac.reverseSound();
-			}
-			if (temp.equals(ObserverCodes.PLAYER_CHANGED_STRING)) {
+				break;
+			case PLAYER_CHANGED:
 				textArea.append("\n" + game.currentPlayerName() + "'s turn.\n");
 				textArea.append(game.currentPlayerName() + " is at " + game.currentPlayerPosition() + ".\n");
 				if (game.currentPlayer().isFreeze()) {
@@ -129,10 +130,12 @@ public class Controller extends JPanel implements Observer {
 					game.switchPlayer();
 				}
 				playerPanel.update();
-			}
-			if (temp.equals(ObserverCodes.PLAYER_WARP_STRING)) {
+				break;
+			case PLAYER_WARP:
 				textArea.append(game.currentPlayerName() + " met the " + game.getWarpAtCurrentPosition() + "\n");
 				game.checkCurrentPlayerStatus();
+				break;
+			default:
 			}
 		}
 		textArea.setCaretPosition(textArea.getDocument().getLength());

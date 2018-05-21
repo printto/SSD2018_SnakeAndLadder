@@ -56,7 +56,7 @@ public class Board extends Observable{
 						squares[i].removePiece(piece);
 						addPiece(piece, i+1);
 						setChanged();
-						notifyObservers(ObserverCodes.WALKING_STRING);
+						notifyObservers(ObserverCodes.PLAYER_WALKING);
 						try {
 							Thread.sleep(200);
 						} catch (InterruptedException e) {
@@ -69,7 +69,7 @@ public class Board extends Observable{
 						squares[i].removePiece(piece);
 						addPiece(piece, i-1);
 						setChanged();
-						notifyObservers(ObserverCodes.WALKING_STRING);
+						notifyObservers(ObserverCodes.PLAYER_WALKING);
 						try {
 							Thread.sleep(200);
 						} catch (InterruptedException e) {
@@ -84,7 +84,7 @@ public class Board extends Observable{
 					piece.reverse();
 				}
 				setChanged();
-				notifyObservers(ObserverCodes.BOARD_UPDATED_STRING);
+				notifyObservers(ObserverCodes.BOARD_UPDATED);
 			}
 		}).start();
 	}
@@ -109,7 +109,7 @@ public class Board extends Observable{
 			piece.reverse();
 		}
 		setChanged();
-		notifyObservers(ObserverCodes.WALKING_STRING);
+		notifyObservers(ObserverCodes.PLAYER_WALKING);
 	}
 
 	/**

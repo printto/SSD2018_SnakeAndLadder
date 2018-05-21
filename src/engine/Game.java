@@ -56,7 +56,7 @@ public class Game extends Observable{
 	public void switchPlayer(){
 		currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
 		setChanged();
-		notifyObservers(ObserverCodes.PLAYER_CHANGED_STRING);
+		notifyObservers(ObserverCodes.PLAYER_CHANGED);
 	}
 
 	/**
@@ -92,7 +92,7 @@ public class Game extends Observable{
 	 */
 	public void currentPlayerWarp(Warp warp){
 		setChanged();
-		notifyObservers(ObserverCodes.PLAYER_WARP_STRING);
+		notifyObservers(ObserverCodes.PLAYER_WARP);
 		currentPlayer().warpPiece(board, warp.getDestination() - currentPlayerPosition());
 	}
 
@@ -116,7 +116,7 @@ public class Game extends Observable{
 		if(!ended){
 			temp = currentPlayer().roll(die);
 			setChanged();
-			notifyObservers(ObserverCodes.DIE_ROLLED_STRING);
+			notifyObservers(ObserverCodes.DIE_ROLLED);
 		}
 		return temp;
 	}
@@ -127,11 +127,11 @@ public class Game extends Observable{
 	public void checkCurrentPlayerStatus(){
 		if(currentPlayer().isFreeze()){
 			setChanged();
-			notifyObservers(ObserverCodes.FREEZE_STRING);
+			notifyObservers(ObserverCodes.PLAYER_FREEZE);
 		}
 		if(currentPlayer().isReverse()){
 			setChanged();
-			notifyObservers(ObserverCodes.REVERSE_STRING);
+			notifyObservers(ObserverCodes.PLAYER_REVERSE);
 		}
 	}
 

@@ -140,10 +140,13 @@ public class BoardPanel extends JPanel implements Observer{
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if(arg instanceof String){
-			String temp = (String) arg;
-			if(temp.equals(ObserverCodes.WALKING_STRING)){
+		if(arg instanceof ObserverCodes){
+			ObserverCodes temp = (ObserverCodes) arg;
+			switch(temp){
+			case PLAYER_WALKING:
 				updateBoard();
+				break;
+			default:
 			}
 		}
 	}
