@@ -56,7 +56,7 @@ public class Game extends Observable{
 	public void switchPlayer(){
 		currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
 		setChanged();
-		notifyObservers(ObserverCodes.PLAYER_CHANGED_STRING);
+		notifyObservers(ObserverCodes.PLAYER_CHANGED);
 	}
 
 	/**
@@ -81,8 +81,6 @@ public class Game extends Observable{
 	 */
 	public void currentPlayerMovePiece(int steps){
 		currentPlayer().movePiece(board, steps);
-		setChanged();
-		notifyObservers(ObserverCodes.BOARD_UPDATED_STRING);
 		if(currentPlayerPosition() == board.getSquares().length - 1){
 			end();
 		}
@@ -94,10 +92,8 @@ public class Game extends Observable{
 	 */
 	public void currentPlayerWarp(Warp warp){
 		setChanged();
-		notifyObservers(ObserverCodes.PLAYER_WARP_STRING);
-		currentPlayer().movePiece(board, warp.getDestination() - currentPlayerPosition());
-		setChanged();
-		notifyObservers(ObserverCodes.BOARD_UPDATED_STRING);
+		notifyObservers(ObserverCodes.PLAYER_WARP);
+		currentPlayer().warpPiece(board, warp.getDestination() - currentPlayerPosition());
 	}
 
 	/**
@@ -106,7 +102,8 @@ public class Game extends Observable{
 	 * <code>false</code> otherwise.
 	 */
 	public boolean isCurrentPlayerWins(){
-		return board.pieceIsAtGoal(currentPlayer().getPiece());
+		ended = board.pieceIsAtGoal(currentPlayer().getPiece());
+		return ended;
 	}
 
 	/**
@@ -119,7 +116,7 @@ public class Game extends Observable{
 		if(!ended){
 			temp = currentPlayer().roll(die);
 			setChanged();
-			notifyObservers(ObserverCodes.DIE_ROLLED_STRING);
+			notifyObservers(ObserverCodes.DIE_ROLLED);
 		}
 		return temp;
 	}
@@ -130,11 +127,11 @@ public class Game extends Observable{
 	public void checkCurrentPlayerStatus(){
 		if(currentPlayer().isFreeze()){
 			setChanged();
-			notifyObservers(ObserverCodes.FREEZE_STRING);
+			notifyObservers(ObserverCodes.PLAYER_FREEZE);
 		}
 		if(currentPlayer().isReverse()){
 			setChanged();
-			notifyObservers(ObserverCodes.REVERSE_STRING);
+			notifyObservers(ObserverCodes.PLAYER_REVERSE);
 		}
 	}
 

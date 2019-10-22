@@ -23,6 +23,7 @@ import sun.audio.*;
 
 import engine.Game;
 import engine.ObserverCodes;
+import engine.Warp;
 
 /**
  * This object is responsible for controlling the game flows. This object also
@@ -52,6 +53,7 @@ public class Controller extends JPanel implements Observer {
 	public Controller(MainFrame frame, Game game) {
 		this.frame = frame;
 		this.game = game;
+		game.getBoard().addObserver(this);
 		game.addObserver(this);
 		initComponents();
 	}
@@ -74,41 +76,52 @@ public class Controller extends JPanel implements Observer {
 		pane.setPreferredSize(new Dimension(200, 400));
 		this.add(pane);
 		textArea.append("Game started with " + game.getPlayers().size() + " players.\n");
-		update(null, ObserverCodes.PLAYER_CHANGED_STRING);
+		update(null, ObserverCodes.PLAYER_CHANGED);
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if (arg instanceof String) {
-			String temp = (String) arg;
-			if (temp.equals(ObserverCodes.BOARD_UPDATED_STRING)) {
+		if (arg instanceof ObserverCodes) {
+			ObserverCodes temp = (ObserverCodes) arg;
+			switch(temp){
+			case BOARD_UPDATED:
 				textArea.append(game.currentPlayerName() + " moved to " + game.currentPlayerPosition() + "\n");
-			}
-			if (temp.equals(ObserverCodes.DIE_ROLLED_STRING)) {
-				textArea.append("Die rolled: " + game.getDieFace() + "\n");
-				game.currentPlayerMovePiece(game.getDieFace());
-				ac.diceSound(game.getDieFace());
 				game.checkCurrentPlayerStatus();
 				if (game.currentPlayerIsAtWarp()) {
-					game.currentPlayerWarp(game.getWarpAtCurrentPosition());
+					Warp warp = game.getWarpAtCurrentPosition();
+					if(warp.toString().equals("snake")){
+						ac.snakeSound();
+					}
+					else{
+						ac.ladderSound();
+					}
+					game.currentPlayerWarp(warp);
+					textArea.append(game.currentPlayerName() + " moved to " + game.currentPlayerPosition() + "\n");
 				}
-				if (game.isEnded()) {
+				if (game.isCurrentPlayerWins()) {
+					ac.winSound();
 					textArea.append("\n" + game.currentPlayerName() + " wins~!\n");
 					infoBox("Player " + game.currentPlayerName() + " wins~!", "Game ended!");
 					frame.end();
-				} else if (game.getDieFace() != 6 && !game.currentPlayer().isReverse()) {
+				} else if (game.currentPlayer().isFreeze() || (game.getDieFace() != 6 && !game.currentPlayer().isReverse())) {
 					game.switchPlayer();
 				}
-			}
-			if (temp.equals(ObserverCodes.FREEZE_STRING)) {
+				frame.getDieUI().setEnable();
+				break;
+			case DIE_ROLLED:
+				textArea.append("Die rolled: " + game.getDieFace() + "\n");
+				game.currentPlayerMovePiece(game.getDieFace());
+				ac.diceSound(game.getDieFace());
+				break;
+			case PLAYER_FREEZE:
 				textArea.append(game.currentPlayerName() + " is frozen.\n");
 				ac.freezeSound();
-			}
-			if (temp.equals(ObserverCodes.REVERSE_STRING)) {
+				break;
+			case PLAYER_REVERSE:
 				textArea.append(game.currentPlayerName() + " stepped on reverse buff.\n");
 				ac.reverseSound();
-			}
-			if (temp.equals(ObserverCodes.PLAYER_CHANGED_STRING)) {
+				break;
+			case PLAYER_CHANGED:
 				textArea.append("\n" + game.currentPlayerName() + "'s turn.\n");
 				textArea.append(game.currentPlayerName() + " is at " + game.currentPlayerPosition() + ".\n");
 				if (game.currentPlayer().isFreeze()) {
@@ -117,11 +130,12 @@ public class Controller extends JPanel implements Observer {
 					game.switchPlayer();
 				}
 				playerPanel.update();
-			}
-			if (temp.equals(ObserverCodes.PLAYER_WARP_STRING)) {
+				break;
+			case PLAYER_WARP:
 				textArea.append(game.currentPlayerName() + " met the " + game.getWarpAtCurrentPosition() + "\n");
-				;
 				game.checkCurrentPlayerStatus();
+				break;
+			default:
 			}
 		}
 		textArea.setCaretPosition(textArea.getDocument().getLength());

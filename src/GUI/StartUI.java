@@ -26,17 +26,16 @@ public class StartUI extends JFrame {
 	private JButton twoPlayer;
 	private JButton threePlayer;
 	private JButton fourPlayer;
-	private AudioController ac = new AudioController();
 
 	/**
 	 * Create game GUI.
 	 */
 	public StartUI(){
 		initComponents();
-		ac.startGame();
 	}
 
 	private void initComponents() {
+		this.setTitle("Snake and Ladder");
 		JPanel wrapup = new JPanel();
 		wrapup.setLayout(new BoxLayout(wrapup,BoxLayout.Y_AXIS));
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -97,8 +96,10 @@ public class StartUI extends JFrame {
 	 * @param args
 	 */
 	public static void main(String[] args){
+		new AudioController().startSound();
 		StartUI ui = new StartUI();
 		ui.start();		
+		new AudioController().bgmStart();
 	}
 	
 }

@@ -46,6 +46,10 @@ public class DiePanel extends JPanel{
 		this.add(roll_btn);
 	}
 	
+	public void setEnable(){
+		roll_btn.setEnabled(true);
+	}
+	
 	/**
 	 * Roll die button action listener.
 	 * @author Pappim Pipatkasrira
@@ -57,6 +61,7 @@ public class DiePanel extends JPanel{
 		public void actionPerformed(ActionEvent e) {
 			int temp = game.currentPlayerRollDice();
 			number.setText("Last roll: " + temp);
+			roll_btn.setEnabled(false);
 		}
 	}
 	

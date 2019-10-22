@@ -26,6 +26,7 @@ public class MainFrame extends JFrame{
 	private JButton restartBtn;
 	private JButton quitBtn;
 	private JPanel south;
+	private DiePanel dieUI;
 
 	/**
 	 * Create a main frame of the game.
@@ -35,16 +36,21 @@ public class MainFrame extends JFrame{
 		this.game = game;
 		initComponents();
 	}
+	
+	public DiePanel getDieUI(){
+		return dieUI;
+	}
 
 	private void initComponents() {
 		BoardPanel boardUI = new BoardPanel(game);
-		DiePanel dieUI = new DiePanel(game);
+		dieUI = new DiePanel(game);
 		Controller controllerUI = new Controller(this,game);
 		ImageIcon restartbtnImg = new ImageIcon(this.getClass().getResource("/img/restartbtn.png"));
 		restartBtn = new JButton(restartbtnImg);
 		ImageIcon quitbtnImg = new ImageIcon(this.getClass().getResource("/img/quitbtn.png"));
 		quitBtn = new JButton(quitbtnImg);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setTitle("Snake and Ladder");
 		this.setLayout(new BorderLayout());
 		this.setResizable(false);
 		JPanel north = new JPanel((LayoutManager) new FlowLayout(FlowLayout.LEFT));
@@ -107,9 +113,12 @@ public class MainFrame extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 			if(mode == RESTART){
 				new StartUI().start();
+				setVisible(false);
+				dispose();
 			}
-			setVisible(false);
-			dispose();
+			if(mode == QUIT){
+				System.exit(0);
+			}
 		}
 	}
 	
