@@ -1,6 +1,8 @@
 # SSD Snake and Ladder
 ### 2-4 players Snake and Ladder game
 
+[![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive)
+
 This is Snake and Ladder game that can play by 2-4 players.
 The board's size is 8x8. Players take turns to roll 1 die at a time.
 
